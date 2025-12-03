@@ -1,257 +1,54 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SOGAS Viande Express — Livraison viande Dakar</title>
-  <meta name="description" content="SOGAS Viande Express — Viande fraîche depuis l'abattoir SOGAS. Mouton, bœuf, packs famille, livraison Dakar / Pikine." />
-  <style>
-    :root{--accent:#8b1d1d;--muted:#6b6b6b;--bg:#faf7f5;--card:#ffffff}
-    *{box-sizing:border-box}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; color:#222; background:var(--bg); -webkit-font-smoothing:antialiased}
-    .container{max-width:1100px;margin:24px auto;padding:20px}
-    header{display:flex;align-items:center;gap:16px}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo svg{width:56px;height:56px}
-    h1{font-size:20px;margin:0}
-    .hero{display:grid;grid-template-columns:1fr 380px;gap:20px;margin:20px 0;align-items:center}
-    .hero-card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(20,20,20,0.06)}
-    .badge{background:var(--accent);color:#fff;padding:6px 10px;border-radius:8px;font-weight:600;display:inline-block}
-    p.lead{color:var(--muted);margin:12px 0 20px}
-    .cta{display:flex;gap:12px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
-    .btn--primary{background:var(--accent);color:#fff}
-    .btn--ghost{background:transparent;border:2px solid #eee}
-    .catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
-    .card{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 12px rgba(20,20,20,0.04)}
-    .card h3{margin:0 0 8px}
-    .packs{display:flex;gap:12px;flex-wrap:wrap}
-    .pack{flex:1 1 200px}
-    .info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-    .section-title{display:flex;align-items:center;gap:12px}
-    footer{margin-top:30px;padding:18px 8px;color:var(--muted);font-size:14px;text-align:center}
+<section id="commande" style="max-width:500px;margin:auto;padding:20px;">
+    <h2>Commander maintenant</h2>
 
-    /* Contact / Order form */
-    form{display:grid;gap:10px}
-    input,select,textarea{padding:10px;border-radius:8px;border:1px solid #e6e6e6;width:100%;font-size:14px}
-    textarea{min-height:100px}
-    @media (max-width:900px){.hero{grid-template-columns:1fr;}.catalog{grid-template-columns:repeat(2,1fr)}.info{grid-template-columns:1fr}}
-    @media (max-width:560px){.catalog{grid-template-columns:1fr}.logo svg{width:44px;height:44px}}
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <div class="logo">
-        <!-- Simple cleaver logo -->
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="64" height="64" rx="12" fill="#fff"/>
-          <path d="M44 10c-3 0-9 3-18 6s-13 6-15 8c-2 2-4 6-2 8 2 2 6 0 8-2 2-2 6-6 8-8s6-7 12-9 12-3 12-3z" fill="#8b1d1d"/>
-          <rect x="8" y="38" width="40" height="8" rx="2" fill="#b33" opacity="0.9"/>
-        </svg>
-        <div>
-          <h1>SOGAS Viande Express</h1>
-          <div style="color:var(--muted);font-size:13px">Fraîcheur · Hygiène · Livraison rapide</div>
-        </div>
-      </div>
-    </header>
+    <label>Nom complet :</label>
+    <input type="text" id="nom" required style="width:100%;padding:10px;margin-bottom:10px;">
 
-    <main>
-      <section class="hero">
-        <div class="hero-card">
-          <span class="badge">Direct abattoir SOGAS</span>
-          <h2 style="margin-top:10px">Viande fraîche livrée chez vous — Dakar & Pikine</h2>
-          <p class="lead">Mouton, bœuf, carcasse, packs famille et packs grillades. Commandez par WhatsApp ou via notre formulaire — paiement à la livraison possible.</p>
+    <label>Produit :</label>
+    <select id="produit" style="width:100%;padding:10px;margin-bottom:10px;">
+        <option value="Mouton">Viande de mouton</option>
+        <option value="Bœuf">Viande de bœuf</option>
+        <option value="Abats">Abats (foie, cœur, rognons…)</option>
+    </select>
 
-          <div class="cta">
-            <button class="btn btn--primary" id="whatsappBtn">Commander par WhatsApp</button>
-            <button class="btn btn--ghost" id="orderFormBtn">Remplir un bon de commande</button>
-          </div>
+    <label>Quantité (kg) :</label>
+    <input type="number" id="quantite" min="1" style="width:100%;padding:10px;margin-bottom:10px;">
 
-          <div class="catalog">
-            <div class="card">
-              <h3>Mouton</h3>
-              <p>Viande fraîche, prix au kg. Découpe propre et emballée.</p>
-              <div style="font-weight:700;margin-top:8px">Prix: À renseigner</div>
-            </div>
-            <div class="card">
-              <h3>Bœuf</h3>
-              <p>Morceaux à sauce, côtes, steak. Vente au kg ou demi-carcasse.</p>
-              <div style="font-weight:700;margin-top:8px">Prix: À renseigner</div>
-            </div>
-            <div class="card">
-              <h3>Packs</h3>
-              <p>Packs familles, packs grillades et offres événements (sur devis).</p>
-              <div style="font-weight:700;margin-top:8px">Pack 5kg – Exemple: 5 000 FCFA/kg</div>
-            </div>
-          </div>
+    <label>Mode de paiement :</label>
+    <select id="paiement" style="width:100%;padding:10px;margin-bottom:10px;">
+        <option value="Wave">Wave</option>
+        <option value="Orange Money">Orange Money</option>
+        <option value="Free Money">Free Money</option>
+        <option value="En ligne">Paiement en ligne (PayTech/PayDunya)</option>
+        <option value="À la livraison">Paiement à la livraison</option>
+    </select>
 
-          <div class="section-title" style="margin-top:16px">
-            <strong>Zones de livraison</strong>
-          </div>
-          <div style="color:var(--muted);margin-top:6px">Dakar centre, Pikine, Guédiawaye. Livraison 24–48h selon commande. Frais: 500–1500 FCFA (modulable).</div>
-        </div>
+    <button onclick="envoyerWhatsApp()" 
+            style="width:100%;padding:15px;background:#25D366;color:white;font-size:16px;border:none;border-radius:8px;">
+        Commander via WhatsApp
+    </button>
+</section>
 
-        <aside style="display:flex;flex-direction:column;gap:12px">
-          <div class="hero-card" style="text-align:center">
-            <!-- Placeholder image using inline SVG -->
-            <div style="background:#fff;padding:12px;border-radius:8px">
-              <svg width="320" height="180" viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Image viande">
-                <rect rx="10" width="320" height="180" fill="#fdeeea"/>
-                <g transform="translate(24,18)" fill="#8b1d1d">
-                  <rect x="0" y="60" width="120" height="60" rx="6"/>
-                  <circle cx="160" cy="50" r="30"/>
-                </g>
-              </svg>
-            </div>
-            <div style="margin-top:10px;font-weight:700">Livraison partout Dakar / Pikine</div>
-            <div style="color:var(--muted);font-size:13px;margin-top:6px">Paiement à la livraison possible</div>
-          </div>
+<script>
+function envoyerWhatsApp() {
 
-          <div class="hero-card">
-            <div style="font-weight:700;margin-bottom:8px">Contact rapide</div>
-            <div style="color:var(--muted);font-size:14px">WhatsApp / Téléphone</div>
-            <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
-              <button class="btn btn--primary" id="whatsappSmall">WhatsApp</button>
-              <a class="btn" href="tel:+221000000000" style="background:#eee;border-radius:10px">Appeler</a>
-            </div>
-            <div style="margin-top:10px;font-size:13px;color:var(--muted)">Remplacez le numéro dans le code par votre numéro réel (format international +221...)</div>
-          </div>
-        </aside>
-      </section>
+    let nom = document.getElementById("nom").value;
+    let produit = document.getElementById("produit").value;
+    let quantite = document.getElementById("quantite").value;
+    let paiement = document.getElementById("paiement").value;
 
-      <section style="margin-top:18px">
-        <div class="section-title"><h3>Nos packs populaires</h3></div>
-        <div class="packs">
-          <div class="card pack">
-            <h4>Pack Famille — 5 kg</h4>
-            <p>3kg viande rouge + 2kg morceaux pour sauce. Idéal pour 5–8 personnes.</p>
-            <div style="font-weight:700">Prix: À renseigner</div>
-          </div>
-          <div class="card pack">
-            <h4>Pack Grillades</h4>
-            <p>Côtes, gigot, brochettes (sur commande).</p>
-            <div style="font-weight:700">Idéal week-end</div>
-          </div>
-          <div class="card pack">
-            <h4>Pack Événements</h4>
-            <p>Demi-carcasse ou carcasse entière — devis sur demande.</p>
-            <div style="font-weight:700">Sur mesure</div>
-          </div>
-        </div>
-      </section>
+    let numero = "221771234567"; // 👉 Mets ton vrai numéro WhatsApp ici
 
-      <section class="info" style="margin-top:22px">
-        <div class="card">
-          <h3>À propos — SOGAS Viande Express</h3>
-          <p>Nous utilisons notre accès à l'abattoir SOGAS pour garantir viande fraîche et traçable. Découpe propre, emballage hygiénique, livraison rapide.</p>
-          <ul>
-            <li>Hygiène contrôlée</li>
-            <li>Traçabilité depuis l'abattoir</li>
-            <li>Prices compétitifs pour restaurants et familles</li>
-          </ul>
-        </div>
+    let message = 
+        "Nouvelle commande:%0A" +
+        "👤 Nom : " + nom + "%0A" +
+        "🥩 Produit : " + produit + "%0A" +
+        "⚖️ Quantité : " + quantite + " kg%0A" +
+        "💳 Paiement : " + paiement + "%0A" +
+        "Merci !";
 
-        <div class="card">
-          <h3>Commander — Formulaire rapide</h3>
-          <!-- ORDER FORM: on submit opens WhatsApp prefilled message -->
-          <form id="orderForm">
-            <label>Nom complet<input type="text" id="custName" placeholder="Ex: Awa Diop" required></label>
-            <label>Téléphone<input type="tel" id="custPhone" placeholder="77xxxxxxx" required></label>
-            <label>Adresse<textarea id="custAddress" placeholder="Quartier, rue, point de repère" required></textarea></label>
-            <label>Produit / Pack
-              <select id="custProduct">
-                <option>Mouton (kg)</option>
-                <option>Bœuf (kg)</option>
-                <option>Pack Famille 5kg</option>
-                <option>Pack Grillades</option>
-                <option>Commande pro / restaurant</option>
-              </select>
-            </label>
-            <label>Quantité<input type="number" id="custQty" placeholder="Kg ou nombre" min="1" value="1"></label>
-            <label>Notes<textarea id="custNotes" placeholder="Ex: demande découpe spéciale, date de livraison" ></textarea></label>
-            <div style="display:flex;gap:8px">
-              <button type="submit" class="btn btn--primary">Envoyer via WhatsApp</button>
-              <button type="button" class="btn" id="clearForm">Effacer</button>
-            </div>
-            <div style="font-size:13px;color:var(--muted);margin-top:8px">Après envoi, vous serez redirigé vers WhatsApp pour finaliser la commande.</div>
-          </form>
-        </div>
-      </section>
+    let url = "https://wa.me/" + numero + "?text=" + message;
 
-      <section style="margin-top:20px">
-        <div class="section-title"><h3>FAQ rapide</h3></div>
-        <div style="display:grid;gap:10px;margin-top:8px">
-          <div class="card"><strong>Livraison :</strong> 24–48h selon disponibilité et zone.</div>
-          <div class="card"><strong>Paiement :</strong> Cash à la livraison. Mobile money possible (ajoutez votre numéro).</div>
-          <div class="card"><strong>Qualité :</strong> Découpe et emballage hygiénique depuis SOGAS.</div>
-        </div>
-      </section>
-
-    </main>
-
-    <footer>
-      © <span id="year"></span> SOGAS Viande Express — Conçu pour la livraison locale. Modifiez les prix et numéros dans le fichier HTML.
-    </footer>
-  </div>
-
-  <script>
-    // Replace this with your real WhatsApp number in international format (no spaces), e.g. +22177XXXXXXX
-    const WA_NUMBER = '+221000000000';
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    function openWhatsAppMessage(message){
-      // whatsapp web intent
-      const encoded = encodeURIComponent(message);
-      const url = `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encoded}`;
-      window.open(url, '_blank');
-    }
-
-    // Main CTA
-    document.getElementById('whatsappBtn').addEventListener('click', ()=>{
-      const msg = `Bonjour, je souhaite commander de la viande. Merci de m'indiquer les disponibilités.`;
-      openWhatsAppMessage(msg);
-    });
-
-    document.getElementById('whatsappSmall').addEventListener('click', ()=>{
-      const msg = `Bonjour, je veux commander.`; openWhatsAppMessage(msg);
-    });
-
-    document.getElementById('orderFormBtn').addEventListener('click', ()=>{
-      document.getElementById('custName').focus(); // simple UX
-      window.scrollTo({top: document.getElementById('orderForm').offsetTop - 20, behavior:'smooth'});
-    });
-
-    // Form submission -> open WhatsApp with prefilled message
-    document.getElementById('orderForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      const name = document.getElementById('custName').value.trim();
-      const phone = document.getElementById('custPhone').value.trim();
-      const address = document.getElementById('custAddress').value.trim();
-      const product = document.getElementById('custProduct').value;
-      const qty = document.getElementById('custQty').value;
-      const notes = document.getElementById('custNotes').value.trim();
-
-      let message = `Commande%20SOGAS%20Viande%20Express%0A` +
-                    `Nom%20: ${encodeURIComponent(name)}%0A` +
-                    `Téléphone%20: ${encodeURIComponent(phone)}%0A` +
-                    `Adresse%20: ${encodeURIComponent(address)}%0A` +
-                    `Produit%20: ${encodeURIComponent(product)}%0A` +
-                    `Quantité%20: ${encodeURIComponent(qty)}%0A`;
-      if(notes) message += `%0ANotes%20: ${encodeURIComponent(notes)}`;
-
-      // The openWhatsAppMessage function encodes and opens - but here message is already encoded, so open direct
-      const url = `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${message}`;
-      window.open(url, '_blank');
-    });
-
-    document.getElementById('clearForm').addEventListener('click', ()=>{
-      document.getElementById('orderForm').reset();
-    });
-
-    // Helpful console reminder
-    console.log('Rappel: remplacez WA_NUMBER dans le code par votre numéro WhatsApp complet (ex: +22177xxxxxxx) et mettez vos prix.');
-  </script>
-</body>
-</html>
+    window.open(url, "_blank");
+}
+</script>
