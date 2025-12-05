@@ -175,17 +175,22 @@ function sendOrder() {
     let address = document.getElementById("address").value;
     let pay = document.getElementById("pay").value;
 
-    let message = `*Nouvelle commande SOGAS Viande Express*%0A
-Nom : ${name}%0A
-Produit : ${product}%0A
-Quantité : ${qty} Kg%0A
-Adresse : ${address}%0A
-Paiement : ${pay}%0A`;
+    // message proprement encodé
+    let message = encodeURIComponent(
+        `*Nouvelle commande SOGAS Viande Express*\n` +
+        `Nom : ${name}\n` +
+        `Produit : ${product}\n` +
+        `Quantité : ${qty} Kg\n` +
+        `Adresse : ${address}\n` +
+        `Paiement : ${pay}`
+    );
 
-    // Ouvre WhatsApp DIRECTEMENT
-    window.location.href = `https://api.whatsapp.com/send?phone=221770919431&text=${message}`;
+    // lien officiel WhatsApp normal
+    let url = `https://api.whatsapp.com/send?phone=221770919431&text=${message}`;
+
+    // ouvrir directement whatsapp
+    window.location.href = url;
 }
-
 </script>
 
 <footer>
