@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Bouchere Mobile "le SALOUM"</title>
+    <title>SOGAS Viande Express</title>
 
     <style>
         body {
@@ -100,26 +100,22 @@
 
 <header>
     <img src="logo.png" alt="SOGAS Logo">
-    <h1>Bouchere Mobile "le SALOUM"</h1>
+    <h1>SOGAS VIANDE EXPRESS</h1>
     <p>Livraison rapide de viande de qualité à Dakar</p>
 
     <nav>
         <a href="index.html">Accueil</a> |
         <a href="galerie.html">Galerie</a> |
-        <a href="tel:221770919431">Appeler : +221 77 091 94 31</a>
+        <a href="tel:221770919431">Appeler : 77 091 94 31</a>
     </nav>
 </header>
 
 <div class="section">
     <h2>Nos Produits</h2>
 
-    <div class="product"><span>🥩</span> Viande de mouton fraîche </div>
-    <div class="product"><span>🐄</span> Viande de bœuf fraiche </div>
-    <div class="product"><span>🐄</span> Jarret de boeuf/Tête d'agneau </div>
-    <div class="product"><span>🔥</span> Abats (foie, cœur, rognons) </div>
-    <div class="product"><span>🐄</span> Pack Famille </div>
-    <div class="product"><span>🐄</span> Pack Soupe (Lakhass - Viande )  </div>
-
+    <div class="product"><span>🥩</span> Viande de mouton fraîche — <b>Poids : 2 à 30 Kg</b></div>
+    <div class="product"><span>🐄</span> Viande de bœuf premium — <b>Poids : 1 à 20 Kg</b></div>
+    <div class="product"><span>🔥</span> Abats (foie, cœur, rognons) — <b>Poids : 0,5 à 5 Kg</b></div>
 </div>
 
 <div class="section">
@@ -133,9 +129,7 @@
         <select id="product">
             <option>Viande de mouton</option>
             <option>Viande de bœuf</option>
-            <option>Pack Famille</option>
-            <option>Pack Soupe</option>
-            
+            <option>Abats (foie, cœur, rognons)</option>
         </select>
 
         <label>Quantité (Kg)</label>
@@ -166,7 +160,7 @@
         </a>
     </div>
 </div>
-    
+
 <script>
 function sendOrder() {
     let name = document.getElementById("name").value;
@@ -175,7 +169,6 @@ function sendOrder() {
     let address = document.getElementById("address").value;
     let pay = document.getElementById("pay").value;
 
-    // message proprement encodé
     let message = encodeURIComponent(
         `*Nouvelle commande SOGAS Viande Express*\n` +
         `Nom : ${name}\n` +
@@ -185,11 +178,7 @@ function sendOrder() {
         `Paiement : ${pay}`
     );
 
-    // lien officiel WhatsApp normal
-    let url = `https://api.whatsapp.com/send?phone=221770919431&text=${message}`;
-
-    // ouvrir directement whatsapp
-    window.location.href = url;
+    window.location.href = `https://api.whatsapp.com/send?phone=221770919431&text=${message}`;
 }
 </script>
 
