@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -122,6 +122,7 @@
     <h2>Commander Maintenant</h2>
 
     <div class="order-box">
+
         <label>Nom complet</label>
         <input type="text" id="name" placeholder="Votre nom">
 
@@ -143,6 +144,9 @@
             <option>30</option>
         </select>
 
+        <label>Montant à payer (FCFA)</label>
+        <input type="number" id="amount" placeholder="Ex : 15000">
+
         <label>Adresse de livraison</label>
         <input type="text" id="address" placeholder="ex : Pikine, Keur Massar…">
 
@@ -160,36 +164,53 @@
         </a>
     </div>
 </div>
+
 <script>
 function sendOrder() {
     let name = document.getElementById("name").value.trim();
     let product = document.getElementById("product").value.trim();
     let qty = document.getElementById("qty").value.trim();
+    let amount = document.getElementById("amount").value.trim();
     let address = document.getElementById("address").value.trim();
     let pay = document.getElementById("pay").value.trim();
 
-    // Vérification des champs vides
-    if (!name || !product || !qty || !address || !pay) {
+    if (!name || !product || !qty || !amount || !address || !pay) {
         alert("Veuillez remplir tous les champs avant de commander.");
         return;
     }
 
-    let message =
-        `*Nouvelle commande Boucherie Mobile "le Saloum" *\n` +
-        `------------------------------\n` +
-        `👤 Nom : ${name}\n` +
-        `🥩 Produit : ${product}\n` +
-        `⚖️ Quantité : ${qty} Kg\n` +
-        `📍 Adresse : ${address}\n` +
-        `💰 Paiement : ${pay}\n` +
-        `------------------------------`;
+    let payInstructions = "";
+
+    if (pay === "Wave") {
+        payInstructions = 
+`💳 *Instructions de paiement Wave*
+Envoyer *${amount} FCFA* au numéro :
+➡️ *77 091 94 31*
+Puis envoyer la capture du paiement ici.`;
+    }
+
+    if (pay === "Orange Money") {
+        payInstructions =
+`💳 *Instructions de paiement Orange Money*
+Envoyer *${amount} FCFA* au numéro :
+➡️ *77 091 94 31*
+Puis envoyer la capture du paiement ici.`;
+    }
+
+    let message = 
+`*Nouvelle commande SOGAS Viande Express*\n
+👤 Nom : ${name}
+🥩 Produit : ${product}
+⚖️ Quantité : ${qty} Kg
+💰 Montant : ${amount} FCFA
+📍 Adresse : ${address}
+💳 Paiement choisi : ${pay}\n
+${payInstructions}`;
 
     let url = "https://wa.me/221770919431?text=" + encodeURIComponent(message);
-
     window.open(url, "_blank");
 }
 </script>
-
 
 <footer>
     © 2025 SOGAS Viande Express — Dakar
