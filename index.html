@@ -160,28 +160,36 @@
         </a>
     </div>
 </div>
-
 <script>
 function sendOrder() {
-    let name = document.getElementById("name").value;
-    let product = document.getElementById("product").value;
-    let qty = document.getElementById("qty").value;
-    let address = document.getElementById("address").value;
-    let pay = document.getElementById("pay").value;
+    let name = document.getElementById("name").value.trim();
+    let product = document.getElementById("product").value.trim();
+    let qty = document.getElementById("qty").value.trim();
+    let address = document.getElementById("address").value.trim();
+    let pay = document.getElementById("pay").value.trim();
 
-    let message = encodeURIComponent(
+    // Vérification des champs vides
+    if (!name || !product || !qty || !address || !pay) {
+        alert("Veuillez remplir tous les champs avant de commander.");
+        return;
+    }
+
+    let message =
         `*Nouvelle commande SOGAS Viande Express*\n` +
-        `Nom : ${name}\n` +
-        `Produit : ${product}\n` +
-        `Quantité : ${qty} Kg\n` +
-        `Adresse : ${address}\n` +
-        `Paiement : ${pay}`
-    );
+        `------------------------------\n` +
+        `👤 Nom : ${name}\n` +
+        `🥩 Produit : ${product}\n` +
+        `⚖️ Quantité : ${qty} Kg\n` +
+        `📍 Adresse : ${address}\n` +
+        `💰 Paiement : ${pay}\n` +
+        `------------------------------`;
 
-    // Version WhatsApp 100% fonctionnelle
-    window.open(`https://wa.me/221770919431?text=${message}`, "_blank");
+    let url = "https://wa.me/221770919431?text=" + encodeURIComponent(message);
+
+    window.open(url, "_blank");
 }
 </script>
+
 
 <footer>
     © 2025 SOGAS Viande Express — Dakar
