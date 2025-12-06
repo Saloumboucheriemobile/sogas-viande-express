@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packs — SOGAS Viande Express</title>
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+        header { background: #d32f2f; color: white; text-align: center; padding: 25px; }
+        header img { width: 100px; margin-bottom: 10px; }
+        nav a { color: white; margin: 0 10px; text-decoration: underline; }
+
+        .section { padding: 20px; }
+        .pack {
+            background: white; padding: 20px; margin-bottom: 20px;
+            border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .pack img { width: 100%; border-radius: 10px; }
+        .pack h3 { margin-top: 10px; color: #d32f2f; }
+
+        select, input {
+            width: 100%; padding: 12px; margin-top: 10px;
+            border: 1px solid #ccc; border-radius: 8px;
+        }
+
+        button {
+            width: 100%; padding: 15px; background: #d32f2f;
+            border: none; border-radius: 10px; color: white; font-size: 18px;
+            cursor: pointer; margin-top: 15px;
+        }
+
+        .price-display {
+            background: #eee; padding: 10px; margin-top: 10px;
+            border-radius: 8px; font-size: 18px; text-align: center;
+        }
+
+        footer {
+            background: #333; color: white; text-align: center;
+            padding: 12px; margin-top: 30px;
+        }
+    </style>
+
+    <script>
+        const prices = {
+            "Pack Mouton": 4600,
+            "Pack Boeuf": 3800,
+            "Pack Famille": 4200     // tu peux changer ce prix
+        };
+
+        function updatePrice(packId) {
+            let weight = document.getElementById("weight_" + packId).value;
+            let packName = document.getElementById("name_" + packId).innerText;
+            let priceKg = prices[packName];
+
+            let total = weight * priceKg;
+
+            document.getElementById("price_" + packId).innerText =
+                total.toLocaleString() + " FCFA";
+        }
+
+        function orderPack(packId) {
+            let packName = document.getElementById("name_" + packId).innerText;
+            let weight = document.getElementById("weight_" + packId).value;
+            let priceKg = prices[packName];
+            let total = weight * priceKg;
+
+            let msg = encodeURIComponent(
+                `*Nouvelle commande PACK*\n` +
+                `Pack : ${packName}\n` +
+                `Poids : ${weight} Kg\n` +
+                `Prix total : ${total} FCFA\n` +
+                `Client : (entrez nom)\n` +
+                `Adresse : (entrez adresse)`
+            );
+
+            window.location.href = `https://api.whatsapp.com/send?phone=221770919431&text=${msg}`;
+        }
+    </script>
+</head>
+
+<body>
+
+<header>
+    <img src="logo.png" alt="Logo Sogas">
+    <h1>Packs SOGAS Viande Express</h1>
+
+    <nav>
+        <a href="index.html">Accueil</a> |
+        <a href="pack.html">Packs</a> |
+        <a href="galerie.html">Galerie</a>
+    </nav>
+</header>
+
+<div class="section">
+
+    <h2>Nos Packs Flexibles</h2>
+
+    <!-- PACK MOUTON -->
+    <div class="pack">
+        <img src="pack1.jpg" alt="Pack Mouton">
+        <h3 id="name_1">Pack Mouton</h3>
+        <p>Prix : <b>4600 FCFA / Kg</b></p>
+
+        <label>Choisir Poids :</label>
+        <select id="weight_1" onchange="updatePrice(1)">
+            <option value="1">1 Kg</option>
+            <option value="2">2 Kg</option>
+            <option value="5">5 Kg</option>
+            <option value="10">10 Kg</option>
+            <option value="15">15 Kg</option>
+            <option value="20">20 Kg</option>
+        </select>
+
+        <div class="price-display">
+            Total : <span id="price_1">4600 FCFA</span>
+        </div>
+
+        <button onclick="orderPack(1)">Commander ce pack</button>
+    </div>
+
+    <!-- PACK BOEUF -->
+    <div class="pack">
+        <img src="pack2.jpg" alt="Pack Boeuf">
+        <h3 id="name_2">Pack Boeuf</h3>
+        <p>Prix : <b>3800 FCFA / Kg</b></p>
+
+        <label>Choisir Poids :</label>
+        <select id="weight_2" onchange="updatePrice(2)">
+            <option value="1">1 Kg</option>
+            <option value="2">2 Kg</option>
+            <option value="5">5 Kg</option>
+            <option value="10">10 Kg</option>
+            <option value="15">15 Kg</option>
+            <option value="20">20 Kg</option>
+        </select>
+
+        <div class="price-display">
+            Total : <span id="price_2">3800 FCFA</span>
+        </div>
+
+        <button onclick="orderPack(2)">Commander ce pack</button>
+    </div>
+
+    <!-- PACK FAMILLE -->
+    <div class="pack">
+        <img src="pack3.jpg" alt="Pack Famille">
+        <h3 id="name_3">Pack Famille</h3>
+        <p>Prix : <b>4200 FCFA / Kg</b> (modifiable)</p>
+
+        <label>Choisir Poids :</label>
+        <select id="weight_3" onchange="updatePrice(3)">
+            <option value="1">1 Kg</option>
+            <option value="2">2 Kg</option>
+            <option value="5">5 Kg</option>
+            <option value="10">10 Kg</option>
+            <option value="15">15 Kg</option>
+            <option value="20">20 Kg</option>
+        </select>
+
+        <div class="price-display">
+            Total : <span id="price_3">4200 FCFA</span>
+        </div>
+
+        <button onclick="orderPack(3)">Commander ce pack</button>
+    </div>
+
+</div>
+
+<footer>
+    © 2025 SOGAS Viande Express – Dakar
+</footer>
+
+</body>
+</html>
