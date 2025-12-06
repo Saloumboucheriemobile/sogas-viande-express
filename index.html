@@ -166,51 +166,53 @@
 </div>
 
 <script>
-function sendOrder() {
-    let name = document.getElementById("name").value.trim();
-    let product = document.getElementById("product").value.trim();
-    let qty = document.getElementById("qty").value.trim();
-    let amount = document.getElementById("amount").value.trim();
-    let address = document.getElementById("address").value.trim();
-    let pay = document.getElementById("pay").value.trim();
+function sendWhatsApp() {
+    const nom = document.getElementById("nom").value.trim();
+    const adresse = document.getElementById("adresse").value.trim();
+    const produit = document.getElementById("produit").value;
+    const poids = parseFloat(document.getElementById("poids").value);
+    const montantPack = parseFloat(document.getElementById("montantPack").value);
 
-    if (!name || !product || !qty || !amount || !address || !pay) {
-        alert("Veuillez remplir tous les champs avant de commander.");
-        return;
+    // Prix au kg mis à jour
+    const prixKg = {
+        mouton: 4600,
+        boeuf: 3800
+    };
+
+    let montant = 0;
+    let details = "";
+
+    // Cas 1 : produit au KG
+    if (produit === "mouton" || produit === "boeuf") {
+        montant = poids * prixKg[produit];
+        details = 
+            `🥩 Produit : ${produit}%0A` +
+            `⚖️ Poids : ${poids} kg%0A` +
+            `💵 Prix total : ${montant} FCFA%0A`;
     }
 
-    let payInstructions = "";
-
-    if (pay === "Wave") {
-        payInstructions = 
-`💳 *Instructions de paiement Wave*
-Envoyer *${amount} FCFA* au numéro :
-➡️ *77 091 94 31*
-Puis envoyer la capture du paiement ici.`;
+    // Cas 2 : Pack (prix libre)
+    else if (produit === "pack") {
+        montant = montantPack;
+        details =
+            `🎁 Pack personnalisé%0A` +
+            `💵 Prix du Pack : ${montant} FCFA%0A`;
     }
 
-    if (pay === "Orange Money") {
-        payInstructions =
-`💳 *Instructions de paiement Orange Money*
-Envoyer *${amount} FCFA* au numéro :
-➡️ *77 091 94 31*
-Puis envoyer la capture du paiement ici.`;
-    }
+    // Message final
+    const message =
+        `Nouvelle commande SOGAS Viande Express:%0A%0A` +
+        `👤 Nom : ${nom}%0A` +
+        `📍 Adresse : ${adresse}%0A` +
+        details +
+        `%0AMode de paiement : Wave ou Orange Money`;
 
-    let message = 
-`*Nouvelle commande SOGAS Viande Express*\n
-👤 Nom : ${name}
-🥩 Produit : ${product}
-⚖️ Quantité : ${qty} Kg
-💰 Montant : ${amount} FCFA
-📍 Adresse : ${address}
-💳 Paiement choisi : ${pay}\n
-${payInstructions}`;
-
-    let url = "https://wa.me/221770919431?text=" + encodeURIComponent(message);
-    window.open(url, "_blank");
+    const phone = "221770919431";
+    const whatsappURL = `https://wa.me/${phone}?text=${message}`;
+    window.open(whatsappURL, "_blank");
 }
 </script>
+
 
 <footer>
     © 2025 SOGAS Viande Express — Dakar
