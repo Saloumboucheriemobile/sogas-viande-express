@@ -177,8 +177,8 @@ function sendOrder() {
         `Adresse : ${address}\n` +
         `Paiement : ${pay}`
     );
+window.open(`https://wa.me/221770919431?text=${message}`, "_blank");
 
-    window.location.href = `https://api.whatsapp.com/send?phone=221770919431&text=${message}`;
 }
 </script>
 
