@@ -1,211 +1,295 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boucherie Mobile "le Saloum"</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SOGAS Viande Express — Livraison de viande à Dakar</title>
+  <meta name="description" content="SOGAS Viande Express - Viande fraîche depuis l'abattoir SOGAS. Commande facile, packs, livraison Dakar / Pikine." />
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f5f5;
-            color: #333;
-        }
+  <style>
+    /* --------- Variables & Reset --------- */
+    :root{
+      --red:#d32f2f; --dark:#222; --muted:#666; --card:#fff; --bg:#fafafa; --glass: rgba(255,255,255,0.7);
+      --radius:12px; --shadow: 0 8px 24px rgba(20,20,20,0.08);
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0;background:var(--bg);color:var(--dark);-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
 
-        header {
-            background: #d32f2f;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-        }
+    /* --------- Layout --------- */
+    .wrap{max-width:var(--max-width);margin:20px auto;padding:18px}
+    header.site-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 18px;background:linear-gradient(180deg,var(--card),#fff);border-radius:14px;box-shadow:var(--shadow)}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{width:72px;height:72px;object-fit:contain;border-radius:12px}
+    .brand h1{font-size:18px;margin:0}
+    nav.main-nav{display:flex;gap:12px;align-items:center}
+    nav.main-nav a{padding:8px 12px;border-radius:10px;font-weight:600}
+    nav.main-nav a:hover{background:#f5f5f5}
 
-        header img {
-            width: 120px;
-            margin-bottom: 10px;
-        }
+    /* --------- Hero --------- */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:18px;margin-top:18px;align-items:center}
+    .hero-card{background:var(--card);padding:22px;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero h2{margin:0 0 8px;font-size:24px}
+    .hero p.lead{color:var(--muted);margin:8px 0 18px}
+    .cta-row{display:flex;gap:12px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+    .btn--primary{background:var(--red);color:#fff}
+    .btn--ghost{background:transparent;border:2px solid #eee}
 
-        h1 { margin: 0; font-size: 32px; }
+    /* --------- Catalog --------- */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(20,20,20,0.04);display:flex;flex-direction:column;gap:10px}
+    .card h3{margin:0}
+    .muted{color:var(--muted)}
 
-        nav a {
-            color: white;
-            margin: 0 10px;
-            text-decoration: underline;
-        }
+    /* --------- Packs dynamic list --------- */
+    .packs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+    .pack{background:linear-gradient(180deg,#fff,#fff);padding:14px;border-radius:12px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .pack img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+    .pack .meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
 
-        .section { padding: 20px; }
+    /* --------- Order section (form) --------- */
+    .order{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow);}
+    label{display:block;margin-top:8px;font-weight:600}
+    input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e6e6;margin-top:6px}
+    .small{font-size:13px;color:var(--muted)}
 
-        .product {
-            background: white;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            font-size: 18px;
-        }
+    /* --------- Gallery --------- */
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .gallery img{width:100%;height:120px;object-fit:cover;border-radius:8px}
 
-        .order-box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-        }
+    /* Floating whatsapp */
+    .whatsapp-float{position:fixed;right:18px;bottom:18px;background:#25D366;color:#fff;padding:14px;border-radius:50px;box-shadow:0 8px 24px rgba(20,20,20,0.18);display:flex;align-items:center;gap:10px;z-index:60}
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+    /* footer */
+    footer{margin-top:20px;text-align:center;color:var(--muted);font-size:14px}
 
-        button {
-            width: 100%;
-            padding: 15px;
-            background: #d32f2f;
-            color: white;
-            border: none;
-            font-size: 18px;
-            border-radius: 8px;
-            margin-top: 15px;
-            cursor: pointer;
-        }
+    /* Responsive */
+    @media (max-width:980px){.hero{grid-template-columns:1fr 320px}.cards{grid-template-columns:repeat(2,1fr)}.packs{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:640px){.hero{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.packs{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}header.site-header{flex-direction:column;align-items:flex-start}nav.main-nav{flex-wrap:wrap}}
 
-        .call-btn {
-            background: #388E3C;
-        }
-
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 15px;
-        }
-    </style>
+    /* small animations */
+    .fade{opacity:0;transform:translateY(8px);transition:all .45s ease}
+    .fade.visible{opacity:1;transform:none}
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <header class="site-header">
+      <div class="brand">
+        <img src="logo.png" alt="SOGAS Logo" />
+        <div>
+          <h1>SOGAS Viande Express</h1>
+          <div class="small muted">Fraîcheur — Hygiène — Livraison rapide</div>
+        </div>
+      </div>
 
-<header>
-    <img src="logo.png" alt="Logo SOGAS">
-    <h1>BOUCHERIE MOBILE "LE SALOUM"</h1>
-    <p>"Une de viande de qualité à prix abordable"</p>
-
-    <nav>
-        <a href="index.html">Accueil</a> |
-        <a href="galerie.html">Galerie</a> |
-        <a href="pack.html">Packs</a> |
+      <nav class="main-nav">
+        <a href="index.html">Accueil</a>
+        <a href="pack.html">Packs</a>
+        <a href="galerie.html">Galerie</a>
         <a href="tel:221770919431">Appeler : 77 091 94 31</a>
-    </nav>
-</header>
+      </nav>
+    </header>
 
+    <main>
+      <section class="hero">
+        <div class="hero-card">
+          <span class="badge" style="background:var(--red);color:#fff;padding:6px 10px;border-radius:8px;font-weight:700">Direct abattoir SOGAS</span>
+          <h2>Viande fraîche livrée chez vous — Dakar & Pikine</h2>
+          <p class="lead">Mouton, bœuf, packs flexibles, abats — commandez en quelques clics, paiement Wave/OM ou à la livraison.</p>
 
-<div class="section">
-    <h2>Nos Produits</h2>
-
-    <div class="product">🥩 <b>Mouton frais</b> — 4600 FCFA/Kg</div>
-    <div class="product">🐄 <b>Bœuf premium</b> — 3800 FCFA/Kg</div>
-    <div class="product">🎁 <b>Packs personnalisés</b> — Prix dans la section Pack </div>
-</div>
-
-
-<div class="section">
-    <h2>Commander Maintenant</h2>
-
-    <div class="order-box">
-
-        <label>Nom complet</label>
-        <input type="text" id="nom" placeholder="Votre nom">
-
-        <label>Produit</label>
-        <select id="produit">
-            <option value="mouton">Mouton (au Kg)</option>
-            <option value="boeuf">Bœuf (au Kg)</option>
-            <option value="pack">Pack (à partir de 9900 FCFA)</option>
-        </select>
-
-        <div id="poidsDiv">
-            <label>Poids (Kg)</label>
-            <input type="number" id="poids" placeholder="Ex : 5">
+          <div class="cards">
+            <div class="card fade" id="card-mouton">
+              <h3>Mouton — 4600 FCFA/kg</h3>
+              <div class="muted">Poids : 2 — 30 Kg (packs disponibles)</div>
+            </div>
+            <div class="card fade" id="card-boeuf">
+              <h3>Bœuf — 3800 FCFA/kg</h3>
+              <div class="muted">Morceaux sans os, steak, morceaux pour sauce</div>
+            </div>
+            <div class="card fade" id="card-packs">
+              <h3>Packs & Événements</h3>
+              <div class="muted">Packs flexibles (ex: 5k, 10k, 20k) — devis sur demande</div>
+            </div>
+          </div>
         </div>
 
-        <div id="montantPackDiv" style="display:none;">
-            <label>Prix du Pack (FCFA)</label>
-            <input type="number" id="montantPack" placeholder="Ex : 15000">
+        <aside class="hero-card order">
+          <h3>Commander vite</h3>
+          <form id="orderForm" onsubmit="handleForm(event)">
+            <label>Nom complet</label>
+            <input id="name" placeholder="Ex: Awa Diop" required />
+
+            <label>Produit</label>
+            <select id="product" onchange="onProductChange()">
+              <option value="mouton">Mouton (4600 FCFA/kg)</option>
+              <option value="boeuf">Bœuf (3800 FCFA/kg)</option>
+              <option value="pack">Pack personnalisé</option>
+            </select>
+
+            <div id="poidsDiv">
+              <label>Poids (kg)</label>
+              <input id="weight" type="number" min="0.5" step="0.5" value="5" />
+            </div>
+
+            <div id="packDiv" style="display:none">
+              <label>Choisissez un pack (montant FCFA)</label>
+              <select id="packSelect">
+                <option value="5000">Pack 5 000</option>
+                <option value="10000">Pack 10 000</option>
+                <option value="15000">Pack 15 000</option>
+                <option value="20000">Pack 20 000</option>
+                <option value="custom">Pack personnalisé (autre montant)</option>
+              </select>
+              <div id="customPackDiv" style="display:none;margin-top:8px">
+                <input id="customPackAmount" type="number" placeholder="Montant en FCFA" />
+              </div>
+            </div>
+
+            <label>Adresse de livraison</label>
+            <textarea id="address" placeholder="Quartier, point de repère" rows="2"></textarea>
+
+            <label>Moyen de paiement</label>
+            <select id="payment">
+              <option>À la livraison</option>
+              <option>Wave</option>
+              <option>Orange Money</option>
+            </select>
+
+            <div style="margin-top:12px;display:flex;gap:10px">
+              <button type="submit" class="btn btn--primary">Commander via WhatsApp</button>
+              <button type="button" class="btn" onclick="callNow()">Appeler</button>
+            </div>
+
+            <div class="small muted" style="margin-top:10px">Paiements Wave/OM : envoyez la somme au 77 091 94 31 puis envoyez la capture sur WhatsApp.</div>
+          </form>
+        </aside>
+      </section>
+
+      <section style="margin-top:22px">
+        <h2>Nos packs rapides</h2>
+        <div class="packs">
+          <div class="pack fade">
+            <img src="images/pack5000.jpg" alt="pack 5000">
+            <h4>Pack 5 000 FCFA</h4>
+            <div class="muted">Poids estimé selon viande choisie</div>
+            <div class="meta">
+              <div style="font-weight:700">5 000 FCFA</div>
+              <a class="btn" href="pack.html">Détails</a>
+            </div>
+          </div>
+
+          <div class="pack fade">
+            <img src="images/pack10000.jpg" alt="pack 10000">
+            <h4>Pack 10 000 FCFA</h4>
+            <div class="muted">Très demandé pour petits événements</div>
+            <div class="meta">
+              <div style="font-weight:700">10 000 FCFA</div>
+              <a class="btn" href="pack.html">Détails</a>
+            </div>
+          </div>
+
+          <div class="pack fade">
+            <img src="images/pack20000.jpg" alt="pack 20000">
+            <h4>Pack 20 000 FCFA</h4>
+            <div class="muted">Ex: 3 kg bœuf + 1 kg foie + 1 tête de mouton</div>
+            <div class="meta">
+              <div style="font-weight:700">20 000 FCFA</div>
+              <a class="btn" href="pack.html">Détails</a>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <label>Adresse de livraison</label>
-        <input type="text" id="adresse" placeholder="Ex : Pikine, Keur Massar…">
+      <section style="margin-top:22px">
+        <h2>Galerie</h2>
+        <div class="gallery">
+          <img src="images/gallery1.jpg" alt="">
+          <img src="images/gallery2.jpg" alt="">
+          <img src="images/gallery3.jpg" alt="">
+          <img src="images/gallery4.jpg" alt="">
+        </div>
+      </section>
 
-        <button onclick="sendWhatsApp()">Commander via WhatsApp</button>
+    </main>
 
-        <a href="tel:221770919431">
-            <button class="call-btn">📞 Appeler directement</button>
-        </a>
+    <footer>
+      © <span id="year"></span> SOGAS Viande Express — Dakar · Contact : 77 091 94 31
+    </footer>
+  </div>
 
-    </div>
-</div>
+  <a class="whatsapp-float" href="https://wa.me/221770919431" target="_blank">📱 Commander</a>
 
+  <script>
+    // small helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
 
+    // make fades visible on load
+    window.addEventListener('load', ()=> document.querySelectorAll('.fade').forEach((el,i)=> setTimeout(()=> el.classList.add('visible'), 120*i)) );
 
-<script>
-document.getElementById("produit").addEventListener("change", function() {
-    const produit = this.value;
+    function callNow(){ window.location.href = 'tel:221770919431'; }
 
-    if (produit === "pack") {
-        document.getElementById("montantPackDiv").style.display = "block";
-        document.getElementById("poidsDiv").style.display = "none";
-    } else {
-        document.getElementById("montantPackDiv").style.display = "none";
-        document.getElementById("poidsDiv").style.display = "block";
-    }
-});
-
-
-function sendWhatsApp() {
-    const nom = document.getElementById("nom").value.trim();
-    const adresse = document.getElementById("adresse").value.trim();
-    const produit = document.getElementById("produit").value;
-    const poids = parseFloat(document.getElementById("poids").value);
-    const montantPack = parseFloat(document.getElementById("montantPack").value);
-
-    const prixKg = {
-        mouton: 4600,
-        boeuf: 3800
-    };
-
-    let montant = 0;
-    let details = "";
-
-    if (produit === "mouton" || produit === "boeuf") {
-        montant = poids * prixKg[produit];
-        details =
-            `🥩 Produit : ${produit}%0A` +
-            `⚖️ Poids : ${poids} kg%0A` +
-            `💵 Total : ${montant} FCFA%0A`;
+    function onProductChange(){
+      const p = document.getElementById('product').value;
+      if(p === 'pack'){
+        document.getElementById('poidsDiv').style.display = 'none';
+        document.getElementById('packDiv').style.display = 'block';
+      } else {
+        document.getElementById('poidsDiv').style.display = 'block';
+        document.getElementById('packDiv').style.display = 'none';
+      }
     }
 
-    else if (produit === "pack") {
-        montant = montantPack;
-        details =
-            `🎁 Pack personnalisé%0A` +
-            `💵 Prix : ${montant} FCFA%0A`;
+    document.getElementById('packSelect').addEventListener('change', function(){
+      document.getElementById('customPackDiv').style.display = (this.value === 'custom')? 'block':'none';
+    });
+
+    function handleForm(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const product = document.getElementById('product').value;
+      const weight = parseFloat(document.getElementById('weight').value) || 0;
+      const packValue = document.getElementById('packSelect').value;
+      const customPack = parseInt(document.getElementById('customPackAmount').value) || 0;
+      const address = document.getElementById('address').value.trim();
+      const payment = document.getElementById('payment').value;
+
+      if(!name || (!weight && product!=='pack' && product!=='') || !address){
+        alert('Veuillez remplir votre nom, adresse et le poids / pack.'); return;
+      }
+
+      const prices = { mouton:4600, boeuf:3800 };
+      let total = 0;
+      let details = '';
+
+      if(product === 'pack'){
+        if(packValue === 'custom') total = customPack; else total = parseInt(packValue,10);
+        details = `Pack choisi : ${total} FCFA`;
+      } else {
+        const pricePerKg = prices[product];
+        total = Math.round(pricePerKg * weight);
+        details = `Produit : ${product} | Poids : ${weight} Kg | Prix/kg : ${pricePerKg} FCFA | Total : ${total} FCFA`;
+      }
+
+      let payInstructions = '';
+      if(payment === 'Wave' || payment === 'Orange Money'){
+        payInstructions = `\n\n*Instructions paiement* : Envoyer *${total} FCFA* au 77 091 94 31 puis envoyer la capture ici.`;
+      }
+
+      const message = encodeURIComponent(
+        `*Nouvelle commande SOGAS Viande Express*\n\n`+
+        `Nom : ${name}\n`+
+        `${details}\n`+
+        `Adresse : ${address}\n`+
+        `Mode paiement : ${payment}` + payInstructions
+      );
+
+      // open whatsapp
+      window.open(`https://wa.me/221770919431?text=${message}`,'_blank');
     }
-
-    const message =
-        `Nouvelle commande SOGAS Viande Express:%0A%0A` +
-        `👤 Nom : ${nom}%0A` +
-        `📍 Adresse : ${adresse}%0A` +
-        details + `%0AMode de paiement : Wave ou Orange Money`;
-
-    const phone = "221770919431";
-    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-}
-</script>
-
-
-<footer>
-    © 2025 SOGAS Viande Express — Dakar
-</footer>
-
+  </script>
 </body>
 </html>
