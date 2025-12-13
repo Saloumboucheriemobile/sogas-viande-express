@@ -97,4 +97,130 @@ nav a:hover{
     background:white;
     padding:20px;
     border-radius:12px;
-    box-shadow:0
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+/* FORM */
+input, select, textarea{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    background:#d32f2f;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    margin-top:15px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#b71c1c;
+}
+
+/* FOOTER */
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">
+        <img src="logo.png" alt="Logo SOGAS">
+        <div>
+            <h1>Boucherie Mobile « LE SALOUM »</h1>
+            <p>Fraîcheur — Hygiène — Livraison rapide</p>
+        </div>
+    </div>
+
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="pack.html">Packs</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="tel:221770919431">📞 77 091 94 31</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Viande fraîche au meilleur rapport qualité-prix</h2>
+    <p>Direct abattoir SOGAS — Livraison rapide à Dakar</p>
+</section>
+
+<section class="section">
+    <h2>Nos Prix</h2>
+    <div class="cards">
+        <div class="card">🐄 <b>Bœuf :</b> 3 800 FCFA / Kg</div>
+        <div class="card">🐑 <b>Mouton :</b> 4 600 FCFA / Kg</div>
+        <div class="card">🔥 <b>Packs :</b> dès 9 900 FCFA</div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Commander maintenant</h2>
+    <div class="card">
+        <form onsubmit="sendOrder(event)">
+            <input id="name" placeholder="Votre nom" required>
+
+            <select id="product">
+                <option value="Bœuf">Bœuf (3800 FCFA/Kg)</option>
+                <option value="Mouton">Mouton (4600 FCFA/Kg)</option>
+                <option value="Pack">Pack</option>
+            </select>
+
+            <input id="qty" type="number" placeholder="Quantité (Kg ou Pack)" required>
+
+            <textarea id="address" placeholder="Adresse de livraison" required></textarea>
+
+            <select id="pay">
+                <option>Paiement à la livraison</option>
+                <option>Wave</option>
+                <option>Orange Money</option>
+            </select>
+
+            <button>Commander via WhatsApp</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    © 2025 — Boucherie Mobile LE SALOUM | SOGAS Viande Express
+</footer>
+
+<script>
+function sendOrder(e){
+    e.preventDefault();
+    let msg =
+`Nouvelle commande SOGAS Viande Express
+Nom : ${name.value}
+Produit : ${product.value}
+Quantité : ${qty.value}
+Adresse : ${address.value}
+Paiement : ${pay.value}`;
+
+    window.open("https://wa.me/221770919431?text="+encodeURIComponent(msg));
+}
+</script>
+
+</body>
+</html>
