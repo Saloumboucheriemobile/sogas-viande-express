@@ -1,216 +1,168 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Packs SOGAS Viande Express</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Packs Budget | SOGAS Viande Express</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-        }
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f4f4;
+}
 
-        header {
-            background: #d32f2f;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
+header{
+    background:#d32f2f;
+    color:white;
+    padding:30px;
+    text-align:center;
+}
 
-        h1 {
-            margin: 0;
-            font-size: 32px;
-        }
+section{
+    max-width:1000px;
+    margin:auto;
+    padding:30px 20px;
+}
 
-        .pack-section {
-            padding: 20px;
-        }
+.pack{
+    background:white;
+    padding:25px;
+    margin-bottom:20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
 
-        .pack {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
+.pack h2{
+    color:#d32f2f;
+    margin-top:0;
+}
 
-        .pack img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
+label{
+    font-weight:bold;
+    margin-top:10px;
+    display:block;
+}
 
-        .btn {
-            display: block;
-            text-align: center;
-            background: #d32f2f;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 15px;
-            text-decoration: none;
-            font-size: 18px;
-        }
+input, select{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
 
-        .calc-box {
-            background: #fff7f7;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-        }
+button{
+    width:100%;
+    padding:15px;
+    background:#d32f2f;
+    color:white;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    margin-top:20px;
+    cursor:pointer;
+}
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 8px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
+button:hover{
+    background:#b71c1c;
+}
 
-        .result {
-            margin-top: 10px;
-            font-weight: bold;
-        }
-    </style>
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>Nos Packs Spéciaux</h1>
-    <p>Choisissez votre pack selon votre budget</p>
-
-    <nav>
-        <a href="index.html" style="color:white;text-decoration:underline;">Accueil</a>
-    </nav>
+    <h1>Nos Packs selon votre Budget</h1>
+    <p>Vous choisissez le budget — nous optimisons la quantité</p>
 </header>
 
-<div class="pack-section">
+<section>
 
-    <!-- PACK 5000 -->
-    <div class="pack">
-        <img src="images/pack5000.jpg" alt="Pack 5000 FCFA">
+<div class="pack">
+    <h2>🟢 Pack Économique</h2>
+    <p><b>Budget :</b> 9 900 à 25 000 FCFA</p>
 
-        <h3>Pack 5 000 FCFA</h3>
-        <p>Ideal pour un petit budget.</p>
+    <label>Votre budget (FCFA)</label>
+    <input type="number" id="budget1" placeholder="Ex : 15000">
 
-        <div class="calc-box">
-            <label>Choisissez le type de viande</label>
-            <select id="type5000" onchange="calc(5000, '5000')">
-                <option value="4600">Mouton (4600 FCFA/kg)</option>
-                <option value="3800">Bœuf (3800 FCFA/kg)</option>
-            </select>
+    <label>Produits souhaités</label>
+    <select id="prod1">
+        <option>Bœuf</option>
+        <option>Mouton</option>
+        <option>Bœuf + Mouton</option>
+        <option>Bœuf + Foie</option>
+    </select>
 
-            <p class="result" id="result5000"></p>
-
-            <a class="btn" id="btn5000" target="_blank">Commander via WhatsApp</a>
-        </div>
-    </div>
-
-    <!-- PACK 10000 -->
-    <div class="pack">
-        <img src="images/pack10000.jpg" alt="Pack 10000 FCFA">
-
-        <h3>Pack 10 000 FCFA</h3>
-        <p>Un très bon rapport qualité/prix.</p>
-
-        <div class="calc-box">
-            <label>Choisissez le type de viande</label>
-            <select id="type10000" onchange="calc(10000, '10000')">
-                <option value="4600">Mouton (4600 FCFA/kg)</option>
-                <option value="3800">Bœuf (3800 FCFA/kg)</option>
-            </select>
-
-            <p class="result" id="result10000"></p>
-            <a class="btn" id="btn10000" target="_blank">Commander via WhatsApp</a>
-        </div>
-    </div>
-
-    <!-- PACK 15000 -->
-    <div class="pack">
-        <img src="images/pack15000.jpg" alt="Pack 15000 FCFA">
-
-        <h3>Pack 15 000 FCFA</h3>
-        <p>Parfait pour une famille.</p>
-
-        <div class="calc-box">
-            <label>Choisissez le type de viande</label>
-            <select id="type15000" onchange="calc(15000, '15000')">
-                <option value="4600">Mouton (4600 FCFA/kg)</option>
-                <option value="3800">Bœuf (3800 FCFA/kg)</option>
-            </select>
-
-            <p class="result" id="result15000"></p>
-            <a class="btn" id="btn15000" target="_blank">Commander via WhatsApp</a>
-        </div>
-    </div>
-
-    <!-- PACK PREMIUM -->
-    <div class="pack">
-        <img src="images/premium.jpg" alt="Pack Premium">
-
-        <h3>Pack Premium (Budget libre)</h3>
-        <p>Choisissez votre montant — calcul automatique.</p>
-
-        <div class="calc-box">
-            <label>Montant (FCFA)</label>
-            <input type="number" id="premiumAmount" placeholder="Ex : 25000" oninput="calcPremium()">
-
-            <label>Type de viande</label>
-            <select id="premiumType" onchange="calcPremium()">
-                <option value="4600">Mouton (4600 FCFA/kg)</option>
-                <option value="3800">Bœuf (3800 FCFA/kg)</option>
-            </select>
-
-            <p class="result" id="premiumResult"></p>
-            <a class="btn" id="btnPremium" target="_blank">Commander via WhatsApp</a>
-        </div>
-    </div>
-
+    <button onclick="orderPack('Pack Économique', 'budget1', 'prod1')">
+        Commander ce pack
+    </button>
 </div>
 
+<div class="pack">
+    <h2>🟡 Pack Famille</h2>
+    <p><b>Budget :</b> 25 000 à 50 000 FCFA</p>
+
+    <label>Votre budget (FCFA)</label>
+    <input type="number" id="budget2" placeholder="Ex : 35000">
+
+    <label>Produits souhaités</label>
+    <select id="prod2">
+        <option>Bœuf + Mouton</option>
+        <option>Bœuf + Mouton + Foie</option>
+        <option>Bœuf + Tête de mouton</option>
+    </select>
+
+    <button onclick="orderPack('Pack Famille', 'budget2', 'prod2')">
+        Commander ce pack
+    </button>
+</div>
+
+<div class="pack">
+    <h2>🔴 Pack Prestige</h2>
+    <p><b>Budget :</b> 50 000 à 100 000 FCFA</p>
+
+    <label>Votre budget (FCFA)</label>
+    <input type="number" id="budget3" placeholder="Ex : 80000">
+
+    <label>Produits souhaités</label>
+    <select id="prod3">
+        <option>Bœuf + Mouton + Foie</option>
+        <option>Bœuf + Mouton + Foie + Tête</option>
+        <option>Pack spécial fête</option>
+    </select>
+
+    <button onclick="orderPack('Pack Prestige', 'budget3', 'prod3')">
+        Commander ce pack
+    </button>
+</div>
+
+</section>
+
+<footer>
+    © 2025 — SOGAS Viande Express | Packs Budget
+</footer>
+
 <script>
-function calc(budget, id) {
-    let pricePerKg = document.getElementById("type" + id).value;
-    let kg = (budget / pricePerKg).toFixed(2);
+function orderPack(pack, budgetId, prodId){
+    let budget = document.getElementById(budgetId).value;
+    let product = document.getElementById(prodId).value;
 
-    document.getElementById("result" + id).innerHTML = 
-        "Poids estimé : <b>" + kg + " Kg</b>";
+    let msg = 
+`Commande ${pack}
+Budget : ${budget} FCFA
+Produits souhaités : ${product}
 
-    let msg = encodeURIComponent(
-        `Je veux commander le Pack ${budget} FCFA\n` +
-        `Type de viande : ${pricePerKg == 4600 ? "Mouton" : "Bœuf"}\n` +
-        `Poids estimé : ${kg} Kg`
-    );
+Merci de me proposer les quantités correspondantes.`;
 
-    document.getElementById("btn" + id).href =
-        `https://api.whatsapp.com/send?phone=221770919431&text=${msg}`;
-}
-
-function calcPremium() {
-    let budget = document.getElementById("premiumAmount").value;
-    let pricePerKg = document.getElementById("premiumType").value;
-
-    if (budget == "") {
-        document.getElementById("premiumResult").innerHTML = "";
-        return;
-    }
-
-    let kg = (budget / pricePerKg).toFixed(2);
-
-    document.getElementById("premiumResult").innerHTML =
-        "Poids estimé : <b>" + kg + " Kg</b>";
-
-    let msg = encodeURIComponent(
-        `Commande Pack Premium\nBudget : ${budget} FCFA\n` +
-        `Type de viande : ${pricePerKg == 4600 ? "Mouton" : "Bœuf"}\n` +
-        `Poids estimé : ${kg} Kg`
-    );
-
-    document.getElementById("btnPremium").href =
-        `https://api.whatsapp.com/send?phone=221770919431&text=${msg}`;
+    window.open("https://wa.me/221770919431?text="+encodeURIComponent(msg));
 }
 </script>
 
