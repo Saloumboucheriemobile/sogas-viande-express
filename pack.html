@@ -8,29 +8,59 @@
 <style>
 body{
     margin:0;
-    font-family:Arial, sans-serif;
+    font-family:'Segoe UI', Arial, sans-serif;
     background:#f4f4f4;
 }
 
 header{
-    background:#d32f2f;
+    background:linear-gradient(135deg,#b71c1c,#d32f2f);
     color:white;
-    padding:30px;
+    padding:40px 20px;
     text-align:center;
 }
 
+header h1{
+    margin:0;
+    font-size:34px;
+}
+
+header p{
+    margin-top:10px;
+    font-size:18px;
+    opacity:.95;
+}
+
 section{
-    max-width:1000px;
+    max-width:1100px;
     margin:auto;
-    padding:30px 20px;
+    padding:40px 20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
 }
 
 .pack{
     background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+    transition:transform .3s ease, box-shadow .3s ease;
+    animation:fadeUp .6s ease;
+}
+
+.pack:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 35px rgba(0,0,0,.18);
+}
+
+.pack img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.pack-content{
     padding:25px;
-    margin-bottom:20px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
 
 .pack h2{
@@ -38,9 +68,19 @@ section{
     margin-top:0;
 }
 
+.badge{
+    display:inline-block;
+    background:#d32f2f;
+    color:white;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
 label{
     font-weight:bold;
-    margin-top:10px;
+    margin-top:12px;
     display:block;
 }
 
@@ -48,7 +88,7 @@ input, select{
     width:100%;
     padding:12px;
     margin-top:8px;
-    border-radius:8px;
+    border-radius:10px;
     border:1px solid #ccc;
 }
 
@@ -58,7 +98,7 @@ button{
     background:#d32f2f;
     color:white;
     border:none;
-    border-radius:10px;
+    border-radius:12px;
     font-size:18px;
     margin-top:20px;
     cursor:pointer;
@@ -74,6 +114,17 @@ footer{
     text-align:center;
     padding:20px;
 }
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 </style>
 </head>
 
@@ -81,99 +132,103 @@ footer{
 
 <header>
     <h1>Nos Packs selon votre Budget</h1>
-    <p>Vous choisissez le budget — nous optimisons la quantité</p>
+    <p>💎 Qualité premium — 💰 Budget maîtrisé — 🚚 Livraison rapide</p>
 </header>
 
 <section>
 
+<!-- PACK ECONOMIQUE -->
 <div class="pack">
-    <h2>🟢 Pack Économique</h2>
-    <p><b>Budget :</b> 9 900 à 25 000 FCFA</p>
+    <img src="images/pack-eco.jpg" alt="Pack Économique">
+    <div class="pack-content">
+        <span class="badge">⭐ Meilleur prix</span>
+        <h2>🟢 Pack Économique</h2>
+        <p><b>Budget :</b> 9 900 à 25 000 FCFA</p>
 
-    <label>Votre budget (FCFA)</label>
-    <input type="number" id="budget1" placeholder="Ex : 15000">
+        <label>Votre budget</label>
+        <input type="number" id="budget1" placeholder="Ex : 15000">
 
-    <label>Produits souhaités</label>
-    <select id="prod1">
-        <option>Bœuf</option>
-        <option>Mouton</option>
-        <option>Bœuf + Mouton</option>
-        <option>Bœuf + Foie</option>
-        <option>Bœuf + Viande Soupe</option>
-        <option> Fillet de boeuf+ Jarret de Boeuf</option>
-         <option>Bœuf + Foie</option>
+        <label>Produits souhaités</label>
+        <select id="prod1">
+            <option>Bœuf</option>
+            <option>Mouton</option>
+            <option>Bœuf + Foie</option>
+            <option>Bœuf + Mouton</option>
+        </select>
 
-
-
-    </select>
-
-    <button onclick="orderPack('Pack Économique', 'budget1', 'prod1')">
-        Commander ce pack
-    </button>
+        <button onclick="orderPack('Pack Économique','budget1','prod1')">
+            🛒 Commander
+        </button>
+    </div>
 </div>
 
+<!-- PACK FAMILLE -->
 <div class="pack">
-    <h2>🟡 Pack Famille</h2>
-    <p><b>Budget :</b> 25 000 à 50 000 FCFA</p>
+    <img src="images/pack-famille.jpg" alt="Pack Famille">
+    <div class="pack-content">
+        <span class="badge">👨‍👩‍👧‍👦 Idéal famille</span>
+        <h2>🟡 Pack Famille</h2>
+        <p><b>Budget :</b> 25 000 à 50 000 FCFA</p>
 
-    <label>Votre budget (FCFA)</label>
-    <input type="number" id="budget2" placeholder="Ex : 35000">
+        <label>Votre budget</label>
+        <input type="number" id="budget2" placeholder="Ex : 35000">
 
-    <label>Produits souhaités</label>
-    <select id="prod2">
-        <option>Viande Bœuf + Viande Mouton</option>
-        <option>Viande Bœuf + Viande Mouton + Foie</option>
-        <option>Viande Bœuf + Tête de mouton</option>
-        <option>Viande mouton + Tête de mouton</option>
-        <option>Bœuf + Viande Soupe + Jarret</option>
-        <option>Viande de boeuf+ Fillet de boeufViande mouton</option>
-        
-    </select>
+        <label>Produits souhaités</label>
+        <select id="prod2">
+            <option>Bœuf + Mouton</option>
+            <option>Bœuf + Mouton + Foie</option>
+            <option>Bœuf + Tête de mouton</option>
+        </select>
 
-    <button onclick="orderPack('Pack Famille', 'budget2', 'prod2')">
-        Commander ce pack
-    </button>
+        <button onclick="orderPack('Pack Famille','budget2','prod2')">
+            🛒 Commander
+        </button>
+    </div>
 </div>
 
+<!-- PACK PRESTIGE -->
 <div class="pack">
-    <h2>🔴 Pack Prestige</h2>
-    <p><b>Budget :</b> 50 000 à 100 000 FCFA</p>
+    <img src="images/pack-prestige.jpg" alt="Pack Prestige">
+    <div class="pack-content">
+        <span class="badge">👑 Premium</span>
+        <h2>🔴 Pack Prestige</h2>
+        <p><b>Budget :</b> 50 000 à 100 000 FCFA</p>
 
-    <label>Votre budget (FCFA)</label>
-    <input type="number" id="budget3" placeholder="Ex : 80000">
+        <label>Votre budget</label>
+        <input type="number" id="budget3" placeholder="Ex : 80000">
 
-    <label>Produits souhaités</label>
-    <select id="prod3">
-        <option>Bœuf + Mouton + Foie</option>
-        <option>Bœuf + Mouton + Foie + Tête</option>
-        <option>Fillet de Bœuf + Cotelette d'agneau</option>
-        <option>Pack spécial fête(Mouton entier)</option>
-    </select>
+        <label>Produits souhaités</label>
+        <select id="prod3">
+            <option>Bœuf + Mouton + Foie</option>
+            <option>Bœuf + Mouton + Foie + Tête</option>
+            <option>Pack spécial cérémonie</option>
+        </select>
 
-    <button onclick="orderPack('Pack Prestige', 'budget3', 'prod3')">
-        Commander ce pack
-    </button>
+        <button onclick="orderPack('Pack Prestige','budget3','prod3')">
+            🛒 Commander
+        </button>
+    </div>
 </div>
 
 </section>
 
 <footer>
-    © 2025 — SOGAS Viande Express | Packs Budget
+    © 2025 — SOGAS Viande Express | Qualité & Confiance
 </footer>
 
 <script>
-function orderPack(pack, budgetId, prodId){
-    let budget = document.getElementById(budgetId).value;
-    let product = document.getElementById(prodId).value;
+function orderPack(pack,budgetId,prodId){
+    let budget=document.getElementById(budgetId).value;
+    let product=document.getElementById(prodId).value;
 
-    let msg = 
+    let message=
 `Commande ${pack}
 Budget : ${budget} FCFA
 Produits souhaités : ${product}
 
 Merci de me proposer les quantités correspondantes.`;
 
-    window.open("https://wa.me/221770919431?text="+encodeURIComponent(msg));
+    window.open("https://wa.me/221770919431?text="+encodeURIComponent(message));
 }
 </script>
 
